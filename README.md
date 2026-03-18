@@ -56,7 +56,7 @@ graph TD
         Decide -->|否| Discard[丢弃]
     end
 
-    subgraph 数据预处理与异步入库 - 解耦
+    subgraph 数据预处理与异步入库 - 离线模块
         RawData[原始数据] --> Chunking[文档分块]
         Chunking --> EntityExt[实体提取 all-mpnet-base-v2+LLM]
         EntityExt --> KBData[知识库数据含多层元数据]
