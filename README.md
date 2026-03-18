@@ -152,23 +152,23 @@ Agent开发基于**Langchian1.0版本+LangGraph**，引入**Milvus2.6版本**新
 
             🐍 __init__.py
 
-        📂 high_frequency_query_cache/ - 高频缓存（Redis Bloom Filter）
+        📂 high_frequency_query_cache/ - 高频查询缓存（Redis Bloom Filter）
 
-            🐍 redis_bloom.py  # 高频缓存功能
+            🐍 redis_bloom.py  # 高频查询缓存功能
 
-            🐍 redis_bloom_test_case.py  # 高频缓存测试用例脚本
+            🐍 redis_bloom_test_case.py  # 高频查询缓存测试用例脚本
 
             🐍 __init__.py
             
         📂 memory_short/ - 短期记忆（Redis Hash+SortedSet）
         
-            🐍 redis_short_memory.py  # 短期记忆功能
+            🐍 redis_short_memory.py  # 短期记忆提取 + 短期记忆注入功能
             
             🐍 __init__.py
 
         📂 memory_long/ - 长期记忆（Mem0 + Milvus）
         
-            🐍 long_term_memory.py  # 长期记忆功能
+            🐍 long_term_memory.py  # 长期记忆提取 + 长期记忆注入功能
     
             🐍 __init__.py
 
@@ -182,7 +182,7 @@ Agent开发基于**Langchian1.0版本+LangGraph**，引入**Milvus2.6版本**新
                 
                 🐍 base.py -  # 工具工厂
                 
-                🐍 retrieval.py - # 检索工具
+                🐍 retrieval.py - # 双路检索 + RRF融合 + 重排工具
                 
                 🐍 relation_verifier.py - # 实体关系验证工具
                 
