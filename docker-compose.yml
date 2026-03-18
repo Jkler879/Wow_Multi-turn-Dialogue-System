@@ -1,0 +1,90 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis/redis-stack
+    container_name: redis
+    ports:
+      - "6380:6379"          # 映射到宿主机6380，避免与本地可能运行的Redis冲突
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  milvus:
+    image: milvusdb/milvus:v2.6.6
+    container_name: milvus
+    ports:
+      - "19530:19530"
+    volumes:
+      - milvus_data:/var/lib/milvus
+    environment:
+      - ETCD_USE_EMBED=true
+      - ETCD_DATA_DIR=/var/lib/milvus/etcd
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  neo4j:
+    image: neo4j:2026.01.4
+    container_name: neo4j
+    ports:
+      - "7474:7474"          # HTTP 控制台
+      - "7687:7687"          # Bolt 协议
+    environment:
+      NEO4J_AUTH: neo4j/${NEO4J_PASSWORD:-password}   # 密码从 .env 读取，默认 password
+    volumes:
+      - neo4j_data:/data
+    restart: unless-stopped
+    networks:
+      - app-network
+
+#  ollama:
+#    image: ollama/ollama:latest
+#    container_name: ollama
+#    ports:
+#      - "11434:11434"
+#    volumes:
+#      - ollama_data:/root/.ollama
+#    restart: unless-stopped
+#    networks:
+#      - app-network
+
+  app:
+    build: .
+    container_name: react-agent-app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env                  # 自动加载 .env 文件中的变量
+    environment:
+      # 覆盖服务地址为容器名（必须）
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MILVUS_URI=http://milvus:19530
+      - NEO4J_URL=bolt://neo4j:7687
+      - OLLAMA_BASE_URL=http://ollama:11434
+      # 以下变量如果已在 .env 中定义，可以不用重复，但为了保险可以保留
+      - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+    volumes:
+      - ./models:/app/models   # 挂载模型目录（确保模型文件存在）
+      - ./logs:/app/logs       # 挂载日志目录
+    depends_on:
+      - redis
+      - milvus
+      - neo4j
+    restart: unless-stopped
+    networks:
+      - app-network
+
+volumes:
+  redis_data:
+  milvus_data:
+  neo4j_data:
+
+networks:
+  app-network:
+    driver: bridge

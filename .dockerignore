@@ -1,0 +1,36 @@
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.coverage
+htmlcov
+
+# 虚拟环境
+.venv
+venv
+env
+ENV
+
+# IDE
+.vscode
+.idea
+
+# 日志和数据目录（运行时挂载）
+logs/
+output/
+data/
+
+# 模型文件（通过卷挂载）
+models/
+quantization/
+
+# 环境变量（敏感）
+.env
+.env.*
+
+# Git
+.git
+.gitignore
+
