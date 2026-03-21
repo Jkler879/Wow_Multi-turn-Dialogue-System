@@ -142,108 +142,52 @@ graph TD
 **后续优化方向**
 
 ## 📁 项目代码结构
+    ├── config/ - 配置文件
+      ├── congig_paths.py  # 集成配置管理
+      ├── paths.py  # 集成路径管理  
 
-📂 config/ -  配置管理
-
-    🐍 config.py - 集成配置管理
-
-    🐍 paths.py -  集成路径管理
-
-    🐍 __init__.py
-
-📂 src/ - 核心源代码
-
-    📂 core/ - 功能模块
-
-        📂 query_rewrite/ - 查询改写
-
-            🐍 query_rewriter.py  # 查询改写功能
-
-            🐍 query_rewrite_test_case.py # 查询改写测试用例脚本
-
-            🐍 __init__.py
-
-        📂 high_frequency_query_cache/ - 高频查询缓存（Redis Bloom Filter）
-
-            🐍 redis_bloom.py  # 高频查询缓存功能
-
-            🐍 redis_bloom_test_case.py  # 高频查询缓存测试用例脚本
-
-            🐍 __init__.py
+    ├── src/ - 核心源代码
+      ├── main.py  # 核心处理逻辑
+      ├── api.py  # FastAPI 异步服务入口
+      ├── core/     
+        ├── query_rewrite/ - 查询改写
+           ├── query_rewriter.py  # # 查询改写功能
+           ├── query_rewriter_test_case.py  # 模块测试用例
+           
+        ├── high_frequency_query_cache/ - 高频查询缓存（Redis Bloom Filter）
+           ├── redis_bloom.py  # 高频查询缓存功能
+           ├── redis_bloom_test_case.py  # 模块测试用例
+  
+        ├── memory_short/ - 短期记忆（Redis Hash+SortedSet）
+           ├── redis_short_memory.py  # 短期记忆提取 + 短期记忆注入功能
+  
+        ├── memory_long/ - 长期记忆（Mem0 + Milvus）
+           |—— long_term_memory.py  # 长期记忆提取 + 长期记忆注入功能
+           
+        |—— reAct agent/  - Agent开发
+            |—— tools/ 工具集
+              |—— agent.py - # Agent 图构建与节点
+              |—— base.py -  # 工具工厂
+              |—— retrieval.py - # 混合检索重排工具
+              |—— relation_verifier.py - # 实体关系验证工具
+              |—— translate.py - # 翻译工具
+              
+        |—— redis-stream/ - 消息队列异步入库
+              |—— producer.py -  # 生产者（推送至 Redis Stream）
+              |—— milvus_consumer.py - # 消费者：写入 Milvus
+              |—— neo4j_consumer.py - # 消费者：写入 Neo4j
+              |—— create_milvus_collection.py - # 创建Milvus知识库集合及索引（运行一次）
+              |—— long_memory_collection.py - # 创建Milvus长期记忆集合及索引（运行一次）
+              |—— megrate_milvus.py - # Milvus知识库迁移（支撑BM25全文检索，运行一次）
+              |—— megrate_milvus_test.py - # Milvus迁移测试用例（运行一次） 
             
-        📂 memory_short/ - 短期记忆（Redis Hash+SortedSet）
-        
-            🐍 redis_short_memory.py  # 短期记忆提取 + 短期记忆注入功能
-            
-            🐍 __init__.py
-
-        📂 memory_long/ - 长期记忆（Mem0 + Milvus）
-        
-            🐍 long_term_memory.py  # 长期记忆提取 + 长期记忆注入功能
-    
-            🐍 __init__.py
-
-        📂 react_agent/ - ReAct Agent模块
-        
-            🐍 __init__.py
-        
-            📂 tools/ - Agent 工具集
-                        
-                🐍 agent.py - # Agent 图构建与节点
-                
-                🐍 base.py -  # 工具工厂
-                
-                🐍 retrieval.py - # 双路检索 + RRF融合 + 重排工具
-                
-                🐍 relation_verifier.py - # 实体关系验证工具
-                
-                🐍 translate.py - # 翻译工具
-
-                🐍 __init__.py
-
-        📂 redis-stream/ - 消息队列异步入库
-                
-            🐍 producer.py -  # 生产者（推送至 Redis Stream）
-            
-            🐍 milvus_consumer.py - # 消费者：写入 Milvus
-            
-            🐍 neo4j_consumer.py - # 消费者：写入 Neo4j
-    
-            🐍 create_milvus_collection.py - # 创建Milvus知识库集合及索引（运行一次）
-            
-            🐍 long_memory_collection.py - # 创建Milvus长期记忆集合及索引（运行一次）
-    
-            🐍 megrate_milvus.py - # Milvus知识库迁移（支撑BM25全文检索，运行一次）
-    
-            🐍 megrate_milvus_test.py - # Milvus迁移测试用例（运行一次）
-    
-            🐍 __init__.py
-
-
-🐍 main.py - 核心处理逻辑
-
-🐍 api.py - FastAPI 异步服务入口
-
-🐍 __init__.py
-
-📂 data/ - 原始/处理数据（不提交）
-
-📂 logs/ - 运行时日志（不提交）
-
-📂 models/ - 本地模型文件（不提交）
-
-📂 quantization/ - 量化后模型（不提交）
-
-🔧 .env.example - 环境变量模板（示例，原文件不提交）
-
-🚫 .gitignore - Git 忽略文件
-
-🐳 docker-compose.yml - Docker Compose 编排文件
-
-🏗️ Dockerfile - 应用镜像构建文件
-
-📦 requirements.txt - Python 依赖列表
-
-📖 README.md - 项目说明文档
-
-
+      |—— chunking/ - 数据预处理模块
+      ├── models/ - 本地模型
+      ├── quantization/ - 量化后模型
+      ├── data/ - 源数据
+      ├── .env.example - 环境变量模板（示例，原文件不提交）
+      ├── .gitignore - Git 忽略文件
+      ├── docker-compose.yml - Docker Compose 编排文件
+      ├── Dockerfile - 应用镜像构建文件
+      ├── requirements.txt - Python 依赖列表
+      ├── README.md - 项目说明文档
