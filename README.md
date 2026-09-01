@@ -129,6 +129,7 @@ graph TD
     - `Qwen3-1.7b:Q4_K_M (vLLM GPU部署)`: 长期记忆提取模型经 `4bit量化`后，显存占用减少约3倍（约1.0GB），推理速度提升33%，精度几乎无损。
     - `BGE_reranker_v2`（ONNX CPU部署）: 重排模型经 `ONNX导出 + 动态int8量化`，显存占用减少45%，推理速度提升接近一倍，精度损耗小于1%。
     - `nomic_text_embed_v1`（ONNX CPU部署）: 嵌入模型经 `ONNX导出 + 动态int8量化`，显存占用减少45%，推理速度提升接近一倍，精度损耗小于1%。
+    - `Helsinki-NLP-opus-mt-en-zh`（ONNX CPU部署）: 英转中翻译模型经 `ONNX导出 + 动态int8量化（只量化encoder层）`，显存占用减少45%，推理速度提升接近一倍，精度损耗小于1%。 
 
 - **部署**
     - 容器化：使用 `Docker Compose` 编排所有服务（Redis、Milvus、Neo4j、Ollama），实现一键启动完整环境，保证环境一致性。
