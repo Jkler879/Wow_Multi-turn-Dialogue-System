@@ -245,15 +245,13 @@ graph TD
               |—— milvus_consumer.py - # 消费者：写入 Milvus
               |—— neo4j_consumer.py - # 消费者：写入 Neo4j
               |—— create_milvus_collection.py - # 创建Milvus知识库集合及索引（运行一次）
-              |—— long_memory_collection.py - # 创建Milvus长期记忆集合及索引（运行一次）
-              |—— megrate_milvus.py - # Milvus知识库迁移（支撑BM25全文检索，运行一次）
-              |—— megrate_milvus_test.py - # Milvus迁移测试用例（运行一次） 
+              |—— long_memory_collection.py - # 创建PGvector长期记忆集合及索引（运行一次）
             
       |—— chunking/ - 数据预处理模块
-      ├── models/ - 本地模型
-      ├── quantization/ - 量化后模型
+      ├── models/ - 本地模型（当前为空，参考moedl.txt文件下载）
+      ├── quantization/ - 量化后模型（当前为空，参考moedl.txt文件下载）
       ├── data/ - 源数据
-      ├── .env.example - 环境变量模板（示例，原文件不提交）
+      ├── .env.example - 环境变量模板（示例）
       ├── .gitignore - Git 忽略文件
       ├── docker-compose.yml - Docker Compose 编排文件
       ├── Dockerfile - 应用镜像构建文件
