@@ -138,7 +138,7 @@ graph TD
   | 模型 | 量化方式 | 原始大小 | 量化后大小 | 压缩比 | 单次延迟 (p50) | 内存占用 |
   |------|---------|---------|-----------|--------|---------------|---------|
   | BGE-Reranker-v2-M3 | ONNX 导出 + INT8 动态量化 | ~1.1 GB | 543 MB | ↓50% | 38.8 ms | ~1.2 GB |
-  | nomic-embed-text-v1 | ONNX INT8（官方预量化） | 523 MB | 132 MB | ↓75% | 13.9 ms | ~285 MB |
+  | nomic-embed-text-v1 | ONNX导出 + INT8动态量化 | 523 MB | 132 MB | ↓75% | 13.9 ms | ~285 MB |
   | Helsinki-NLP/opus-mt-en-zh | ONNX 导出 + INT8 动态量化（encoder + decoder 分别量化） | 552 MB | 139 MB | ↓75% | 66.7 ms | ~256 MB |
 
 - **部署**
