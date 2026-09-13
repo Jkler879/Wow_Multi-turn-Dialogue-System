@@ -6,7 +6,15 @@
 
   - **GPU + CPU混合部署** / **检索工具集深度优化** / **知识图谱增强**
 
+## 🖼️ 架构图
 
+<p align="center">
+  <a href="https://Jkler879.github.io/Wow_Multi-turn-Dialogue-System/architecture.html" target="_blank" rel="noopener noreferrer">
+    <img src="./architecture_dark_v3.svg" alt="WOW多轮对话系统 RAG + ReAct Agent 系统架构图" width="100%">
+  </a>
+</p>
+
+<p align="center"><sub>点击图片可查看亮色版本（支持滚轮缩放、拖拽平移）</sub></p>
 
 ## ✨ 核心亮点
 
