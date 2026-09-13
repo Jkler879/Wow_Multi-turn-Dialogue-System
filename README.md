@@ -14,15 +14,6 @@
 
   - **知识图谱增强**：引入 `Neo4j` 存储知识图谱数据，包含`实体关系类型、证据原文及置信度`。对检索结果进行实体关系验证，进一步提升答案准确性，并支持多跳推理扩展。
 
-## 🖼️ 架构图
-
-<p align="center">
-  <a href="https://Jkler879.github.io/Wow_Multi-turn-Dialogue-System/architecture.html" target="_blank" rel="noopener noreferrer">
-    <img src="./architecture_dark_v3.svg" alt="WOW多轮对话系统 RAG + ReAct Agent 系统架构图" width="100%">
-  </a>
-</p>
-
-<p align="center"><sub>点击图片可查看亮色版本（支持滚轮缩放、拖拽平移）</sub></p>
 
 
 ## ✨ 核心亮点
