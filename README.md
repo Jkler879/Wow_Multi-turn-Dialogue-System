@@ -15,7 +15,7 @@
   - **知识图谱增强**：引入 `Neo4j` 存储知识图谱数据，包含`实体关系类型、证据原文及置信度`。对检索结果进行实体关系验证，进一步提升答案准确性，并支持多跳推理扩展。
 
   
-## 🖼️ 流程图
+## 🖼️ 架构图
 <p align="center">
   <a href="./architecture_light.svg" target="_blank">
     <img src="./architecture_light.svg" alt="系统架构图" width="700">
