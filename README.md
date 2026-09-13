@@ -16,80 +16,11 @@
 
   
 ## 🖼️ 流程图
-
-```mermaid
-graph TD
-    User(用户) --> API[FastAPI接口]
-    style User fill:yellow,stroke:#333,stroke-width:2px
-    style API fill:#E6E6FA,stroke:#333,stroke-width:2px
-
-    subgraph 多轮对话系统 - 在线
-        API --> AH["限流"]
-        AH --> QW["查询改写"]
-        QW --> Cache["高频查询缓存"]
-        Cache -->|命中| DirectReturn[直接返回缓存答案]
-        DirectReturn --> User
-        Cache -->|未命中| ShortMem["短期记忆(Redis)"]
-        ShortMem --> LongMemRet["长期记忆检索(Mem0+Milvus)"]
-        LongMemRet --> MsgConstruct[构造初始消息]
-        MsgConstruct --> Agent[ReAct Agent LangGraph]
-    end
-
-    subgraph ReAct Agent
-        Agent --> LLM[LLM推理 Qwen-plus]
-        LLM --> Parse[解析输出]
-        Parse -->|调用工具| Tools[工具集]
-        Tools -->|返回观察| LLM
-        Parse -->|最终答案| FinalAns[最终答案]
-    end
-
-
-    subgraph 工具集
-        Tools --> Retriever[检索工具]
-        Tools --> Verifier[关系验证工具]
-        Tools --> Translator[翻译工具]
-
-        Retriever --> Milvus[(Milvus向量数据库)]
-        Milvus --> VectorSearch[向量检索]
-        Milvus --> FullTextSearch[全文检索]
-        VectorSearch --> RRF[RRF融合]
-        FullTextSearch --> RRF
-        RRF --> Rerank[BGE重排]
-        Rerank --> RetResult[返回Top5候选文档、重排分数]
-        
-        Verifier --> Neo4j[(Neo4j知识图谱)]
-        Neo4j --> VeriResult[返回验证结果、证据、置信度]
-
-        Translator --> Helsinki[Helsinki-NLP模型]
-        Helsinki --> TranslatorResult[返回中文翻译]
-
-    end
-
-    FinalAns -->|返回用户| User
-    FinalAns --> AsyncLongMem[异步长期记忆存储]
-    FinalAns --> UpdateCache[更新缓存及短期记忆]
-
-    subgraph 长期记忆存储
-        AsyncLongMem --> Decide["判断是否值得存储(qwen3-1.7b)"]
-        Decide -->|是| Vectorize[向量检索后比对新旧记忆决定增/删/改/合并]
-        Vectorize --> StoreMem[存入Milvus长期记忆专用集合]
-        Decide -->|否| Discard[丢弃]
-    end
-
-    subgraph 数据预处理与异步入库 - 离线模块
-        RawData[原始数据] --> Chunking[文档分块]
-        Chunking --> EntityExt[NER实体抽取]
-        EntityExt --> KBData[知识库数据]
-        KBData --> Stream[Redis Stream消息队列]
-
-        EntityExt --> RelationExt[RE实体关系抽取]
-        RelationExt --> KGData[知识图谱三元组]
-        KGData --> Stream
-
-        Stream --> MilvusConsumer[写入Milvus]
-        Stream --> Neo4jConsumer[写入Neo4j]
-    end
-```
+<p align="center">
+  <a href="./architecture_light.svg" target="_blank">
+    <img src="./architecture_light.svg" alt="系统架构图" width="700">
+  </a>
+</p>
 
 ## ✨ 核心亮点
 
