@@ -80,12 +80,14 @@
   <text x="40" y="504" font-size="11" font-weight="600" fill="#c2410c">意图路由</text>
   <rect x="350" y="506" width="440" height="48" rx="6" fill="#fed7aa" stroke="#ea580c" stroke-width="2"/>
   <text x="570" y="527" text-anchor="middle" font-size="13" font-weight="700" fill="#7c2d12">意图路由器</text>
-  <text x="430" y="546" text-anchor="middle" font-size="11" fill="#9a3412">▸ direct</text>
-  <text x="570" y="546" text-anchor="middle" font-size="11" fill="#9a3412">▸ local</text>
-  <text x="710" y="546" text-anchor="middle" font-size="11" fill="#9a3412">▸ web_search</text>
+  <text x="460" y="546" text-anchor="middle" font-size="11" fill="#9a3412">▸ direct</text>
+  <text x="572" y="546" text-anchor="middle" font-size="11" fill="#9a3412">▸ local</text>
+  <text x="740" y="546" text-anchor="middle" font-size="11" fill="#9a3412">▸ web_search</text>
 
-  <!-- ↓ Router → Context injection box -->
-  <line x1="600" y1="554" x2="600" y2="578" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ag)"/>
+  <!-- ↓ Router → Context injection box (3 aligned arrows) -->
+  <line x1="460" y1="554" x2="460" y2="578" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ag)"/>
+  <line x1="572" y1="554" x2="572" y2="578" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ag)"/>
+  <line x1="740" y1="554" x2="740" y2="578" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ag)"/>
 
   <!-- ══ LLM 初始上下文注入（居中小框）y=578 ══ -->
   <rect x="400" y="578" width="400" height="42" rx="6"
@@ -94,11 +96,7 @@
   <text x="600" y="612" text-anchor="middle" font-size="10" fill="#64748b">短/长期记忆 + intent_rule → 动态组装 system prompt</text>
 
 
-  <!-- 3 thick diagonal arrows: context injection → execution paths -->
-  <line x1="600" y1="620" x2="200" y2="656" stroke="#3b82f6" stroke-width="2.2" marker-end="url(#ab)"/>
-  <line x1="600" y1="620" x2="572" y2="656" stroke="#3b82f6" stroke-width="2.2" marker-end="url(#ab)"/>
-  <line x1="600" y1="620" x2="972" y2="656" stroke="#3b82f6" stroke-width="2.2" marker-end="url(#ab)"/>
-
+  <!-- 3 routed arrows: context injection → execution paths (L-shaped, same style as inter-module) -->
   <!-- ══ G6: 执行路径 y=636 h=140 ══ -->
   <rect x="24" y="636" width="1152" height="140" rx="8" fill="#f8fafc"/>
   <text x="40" y="654" font-size="11" font-weight="600" fill="#475569">执行路径</text>
@@ -106,11 +104,11 @@
   <rect x="40" y="658" width="316" height="110" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="1.5"/>
   <rect x="40" y="658" width="316" height="4" rx="2" fill="#f59e0b"/>
   <text x="198" y="679" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">直接回答</text>
-  <text x="198" y="695" text-anchor="middle" font-size="10" fill="#64748b">Direct Chain · 无工具调用</text>
-  <text x="198" y="711" text-anchor="middle" font-size="11" fill="#334155">qwen3-30b-a3b（阿里百炼）</text>
-  <text x="198" y="727" text-anchor="middle" font-size="11" fill="#334155">已注入短期记忆 + system prompt</text>
+  <text x="198" y="695" text-anchor="middle" font-size="10" fill="#64748b">qwen3-4B · vLLM</text>
+  <text x="198" y="711" text-anchor="middle" font-size="11" fill="#334155">direct任务强制模型不开启思考模式</text>
+  <text x="198" y="727" text-anchor="middle" font-size="11" fill="#334155">注入长短期记忆 + system prompt</text>
   <text x="198" y="743" text-anchor="middle" font-size="11" fill="#334155">跳过 ReAct 循环，直接返回</text>
-  <text x="198" y="759" text-anchor="middle" font-size="10" fill="#94a3b8">问候 / 身份 / 基础计算</text>
+  <text x="198" y="759" text-anchor="middle" font-size="10" fill="#94a3b8">问候 / 系统身份 / 基础计算</text>
   <!-- Direct bypass: left edge → left margin → down → response left -->
   <path d="M 40,713 L 16,713 L 16,962 L 330,962"
         stroke="#475569" stroke-width="1.8" fill="none"
@@ -133,6 +131,14 @@
   <text x="974" y="727" text-anchor="middle" font-size="11" fill="#334155">强制双路：knowledge_retriever 必须先调用</text>
   <text x="974" y="743" text-anchor="middle" font-size="11" fill="#334155">web_search 强制后续触发</text>
   <text x="974" y="759" text-anchor="middle" font-size="10" fill="#94a3b8">流式推送搜索词 + 来源 URL</text>
+  <!-- context injection → execution paths (drawn after G6 boxes so they appear on top) -->
+  <path d="M 460,620 L 460,630 L 198,630 L 198,659"
+        stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#ab)"/>
+  <path d="M 572,620 L 572,659"
+        stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#ab)"/>
+  <path d="M 740,620 L 740,630 L 974,630 L 974,659"
+        stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#ab)"/>
+
   <!-- tool_call arrows -->
   <line x1="572" y1="776" x2="572" y2="792" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#ab)"/>
   <line x1="974" y1="776" x2="974" y2="792" stroke="#3b82f6" stroke-width="1.2" marker-end="url(#ab)"/>
