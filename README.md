@@ -19,7 +19,7 @@
 
 <p align="center">
   <a href="https://Jkler879.github.io/Wow_Multi-turn-Dialogue-System/architecture.html" target="_blank" rel="noopener noreferrer">
-    <img src="./architecture_light.svg?v=2" alt="WOW多轮对话系统 RAG + ReAct Agent 系统架构图" width="100%">
+    <img src="./architecture_light.svg" alt="WOW多轮对话系统 RAG + ReAct Agent 系统架构图" width="100%">
   </a>
 </p>
 
