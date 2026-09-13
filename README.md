@@ -18,14 +18,12 @@
 ## 🖼️ 架构图
 
 <p align="center">
-  <a href="./architecture_light.svg" target="_blank" rel="noopener noreferrer">
-    <img src="./architecture_light.svg"
-         alt="多轮对话 RAG + ReAct Agent 系统架构图：包含请求入口、查询前处理、缓存、记忆、意图路由、执行路径、工具层、异步任务与可观测性"
-         width="700">
+  <a href="https://你的用户名.github.io/仓库名/architecture.html" target="_blank" rel="noopener noreferrer">
+    <img src="./architecture_light.svg" alt="多轮对话 RAG + ReAct Agent 系统架构图" width="700">
   </a>
 </p>
 
-<p align="center"><sub>点击图片查看原图，可在浏览器中缩放</sub></p>
+<p align="center"><sub>点击图片打开可缩放版本（支持滚轮缩放、拖拽平移）</sub></p>
 
 ## ✨ 核心亮点
 
