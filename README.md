@@ -18,7 +18,7 @@
 ## 🖼️ 架构图
 
 <p align="center">
-  <a href="https://你的用户名.github.io/仓库名/architecture.html" target="_blank" rel="noopener noreferrer">
+  <a href="https://Jkler879.github.io/Wow_Multi-turn-Dialogue-System/architecture.html" target="_blank" rel="noopener noreferrer">
     <img src="./architecture_light.svg" alt="多轮对话 RAG + ReAct Agent 系统架构图" width="700">
   </a>
 </p>
