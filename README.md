@@ -123,10 +123,10 @@
 
 ## 🚀 后续优化方向
   - **推理引擎升级**：
-      - 将 Qwen-plus api 替换为 Qwen3-30B-A3B本地模型推理，移除 API 费用。
-      - 添加多 Agent 协作，改造原有LangGraph单Agent模式。
-      - 添加 MCP在线搜索服务嵌入。
+      - 独立数据飞轮 Agent
       - Qlora微调 Qwen3-4b 模型，增加查询改写、长期记忆新旧记忆对比任务的准确率。
+      - 将 Qwen-plus api 替换为 Qwen3-30B-A3B本地模型推理，提升系统响应且移除 API 费用。
+      - 添加多 Agent 协作，改造原有LangGraph单Agent模式。
       - 添加K3S部署，替代原有Docker Compose。
  
   - **实体关系验证增强**：
