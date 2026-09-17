@@ -146,17 +146,19 @@
       ├── api.py  # FastAPI 异步服务入口
       ├── core/     
         ├── query_rewrite/ - 查询改写
-           ├── query_rewriter.py  # # 查询改写功能
+           ├── query_rewriter.py  # 查询改写功能
            ├── query_rewriter_test_case.py  # 模块测试用例
            
-        ├── high_frequency_query_cache/ - 高频查询缓存（Redis Bloom Filter）
-           ├── redis_bloom.py  # 高频查询缓存功能
+        ├── high_frequency_query_cache/ - 限流、熔断、高频查询缓存（Redis Bloom Filter）
+           ├── redis_bloom.py  # 高频查询缓存
+           ├── rate_limiter.py  # 限流器
+           ├── circuit_breaker.py  # 熔断器
            ├── redis_bloom_test_case.py  # 模块测试用例
   
         ├── memory_short/ - 短期记忆（Redis Hash+SortedSet）
            ├── redis_short_memory.py  # 短期记忆提取 + 短期记忆注入功能
   
-        ├── memory_long/ - 长期记忆（Mem0 + Milvus）
+        ├── memory_long/ - 长期记忆（PGvector + PostgreSQL）
            |—— long_term_memory.py  # 长期记忆提取 + 长期记忆注入功能
            
         |—— reAct agent/  - Agent开发
@@ -166,13 +168,14 @@
               |—— retrieval.py - # 混合检索重排工具
               |—— relation_verifier.py - # 实体关系验证工具
               |—— translate.py - # 翻译工具
+              |—— websearch.py - # 在线搜索工具              
               
         |—— redis-stream/ - 消息队列异步入库
               |—— producer.py -  # 生产者（推送至 Redis Stream）
               |—— milvus_consumer.py - # 消费者：写入 Milvus
               |—— neo4j_consumer.py - # 消费者：写入 Neo4j
-              |—— create_milvus_collection.py - # 创建Milvus知识库集合及索引（运行一次）
-              |—— long_memory_collection.py - # 创建PGvector长期记忆集合及索引（运行一次）
+              |—— create_milvus_collection.py - # 创建Milvus知识库集合及索引（初始化运行一次）
+              |—— long_memory_collection.py - # 创建PGvector长期记忆集合及索引（初始化运行一次）
             
       |—— chunking/ - 数据预处理模块
       ├── models/ - 本地模型（当前为空，参考moedl.txt文件下载）
