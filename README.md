@@ -94,10 +94,10 @@
 |------|------|------|
 | **Agent 框架** | LangGraph | 原生状态图编排可精细控制思考-行动-观察循环，结合Cot使LLM展示思考过程，大幅提高生成准确率 |
 | **ReAct Agent 模型** | Qwen3-30b-a3b (API) | 大参数模型确保支撑ReAct Agent能精准解析输出、稳定执行工具调用。百炼平台提供百万token Free额度，零成本支撑当前阶段开发与测试，后期用Qwen3-30b-a3b本地部署替换 |
-| **重排模型** | BGE CrossEncoder (本地ONNX) | Hugging Face 成熟专业重排模型|
-| **翻译模型** | Helsinki-NLP (本地ONNX) | Hugging Face 成熟中英翻译模型 |
+| **重排模型** | BGE Reranker-v2-m3 (本地ONNX) | Hugging Face 最强开源重排模型之一，26年被 Qwen3-rerank-0.6B性能超越，因项目早期于2026年年初设计选型沿用。|
+| **翻译模型** | Helsinki-NLP (本地ONNX) | Hugging Face 专业开源中英翻译模型（性能、质量在过往项目中实际部署验证过） |
+| **嵌入模型** | nomic-embed-text-v1 (本地ONNX) | 支持前缀注入。知识库入库数据为英文数据集，参考MTEB榜单评分，nomic为英文场景开源嵌入模型的性能标杆。需统一用于知识库向量化入库、用户查询向量化、长期记忆向量化，确保模型维度对齐 |
 | **改写模型** | Qwen3-4B (本地vLLM) | 参考指代消解主流模型选型经验(4-8B)，分别在Qwen3-1.7b、4B、8b测试，4B为精度与速度平衡最佳 |
-| **嵌入模型** | nomic-embed-text-v1 (本地ONNX) | 知识库入库数据为英文数据集，参考MTEB榜单评分，nomic为英文场景开源轻量嵌入模型的性能标杆。需统一用于知识库向量化入库、用户查询向量化、长期记忆向量化，确保模型维度对齐 |
 | **长期记忆模型** | qwen3-1.7b/4b (本地vLLM) | 参考Mem0官方文档，记忆提取部分 Small size模型为黄金选择，记忆更新部分使用4B模型，确保新旧记忆增删改决策的准确性 |
 | **长期记忆框架** | PGvector + PostGreSQL | Qwen3-1.7B/Qwen3-4B分别负责双阶段处理，通过Qwen3-1.7B提取新记忆，Qwen3-4B负责新旧记忆对比，通过function call 接收记忆的新增/更新/删除/合并决策，保证入库格式正确。前期使用LangMem 和 Mem0 开发，过于demo化、操作过程黑盒，代码重构升级为当前架构 |
 | **API 服务** | FastAPI | 异步原生，支撑长期记忆异步写入不阻塞agent主程序 |
