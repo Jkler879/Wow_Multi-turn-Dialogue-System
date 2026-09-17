@@ -93,20 +93,20 @@
 | 组件 | 选型 | 理由 |
 |------|------|------|
 | **Agent 框架** | LangGraph | 原生状态图编排可精细控制思考-行动-观察循环，结合Cot使LLM展示思考过程，大幅提高生成准确率 |
-| **ReAct Agent 模型** | Qwen-plus (API) | 大参数模型确保支撑ReAct Agent能精准解析输出、稳定执行工具调用。百炼平台提供百万token Free额度，零成本支撑当前阶段开发与测试，后期用Qwen3-30b-a3b替换 |
-| **重排模型** | BGE CrossEncoder (本地) | Hugging Face 成熟专业重排模型|
-| **翻译模型** | Helsinki-NLP (本地) | Hugging Face 成熟中英翻译模型 |
-| **改写模型** | Qwen3-4B (本地Ollama) | 参考指代消解主流模型选型经验(4-8B)，分别在Qwen3-1.7b、4B、8b测试，4B为精度与速度平衡最佳 |
-| **嵌入模型** | nomic-embed-text-v1 (本地) | 知识库入库数据为英文数据集，参考MTEB榜单评分，nomic为英文场景开源轻量嵌入模型的性能标杆。需统一用于知识库向量化入库、用户查询向量化、长期记忆向量化，确保模型维度对齐 |
-| **长期记忆模型** | qwen3-1.7b/4b (本地Ollama) | 参考Mem0官方文档，记忆提取部分 Small size模型为黄金选择，记忆更新部分使用稍大模型，确保新旧记忆增删改的准确性 |
-| **长期记忆框架** | Mem0 | 内置状态记忆层，自主决策执行 LLM调用、向量检索、新旧记忆的新增/更新/删除/合并，只需 prompt 引导生成携带记忆类型等元数据的输出。前期使用LangMem开发，过于demo化，代码重构升级为Mem0 |
+| **ReAct Agent 模型** | Qwen3-30b-a3b (API) | 大参数模型确保支撑ReAct Agent能精准解析输出、稳定执行工具调用。百炼平台提供百万token Free额度，零成本支撑当前阶段开发与测试，后期用Qwen3-30b-a3b本地部署替换 |
+| **重排模型** | BGE CrossEncoder (本地ONNX) | Hugging Face 成熟专业重排模型|
+| **翻译模型** | Helsinki-NLP (本地ONNX) | Hugging Face 成熟中英翻译模型 |
+| **改写模型** | Qwen3-4B (本地vLLM) | 参考指代消解主流模型选型经验(4-8B)，分别在Qwen3-1.7b、4B、8b测试，4B为精度与速度平衡最佳 |
+| **嵌入模型** | nomic-embed-text-v1 (本地ONNX) | 知识库入库数据为英文数据集，参考MTEB榜单评分，nomic为英文场景开源轻量嵌入模型的性能标杆。需统一用于知识库向量化入库、用户查询向量化、长期记忆向量化，确保模型维度对齐 |
+| **长期记忆模型** | qwen3-1.7b/4b (本地vLLM) | 参考Mem0官方文档，记忆提取部分 Small size模型为黄金选择，记忆更新部分使用稍大模型，确保新旧记忆增删改的准确性 |
+| **长期记忆框架** | PGvector + PostGreSQL | Qwen3-1.7B/Qwen3-4B分别负责双阶段处理，通过Qwen3-1.7B提取新记忆，Qwen3-4B负责新旧记忆对比，通过function call 接收记忆的新增/更新/删除/合并决策，保证入库格式正确。前期使用LangMem 和 Mem0 开发，过于demo化、操作过程黑盒，代码重构升级为当前架构 |
 | **API 服务** | FastAPI | 异步原生，支撑长期记忆异步写入不阻塞agent主程序 |
 | **向量数据库** | Milvus 2.6 |IVF_RABITQ 新索引内存占用低且召回率高，sparse + BM25function实现原生全文检索，避免额外引入Elasticsearch降低数据库运维成本 |
-| **图数据库** | Neo4j | GraphRag主流选择，支撑知识图谱存储 |
-| **缓存+短期记忆数据库** | Redis-Stack | 内存数据库，低延迟读写适合短期记忆存取，内置布隆过滤器支撑高频查询缓存过滤 |
+| **图数据库** | Neo4j | GraphRag主流选择，支撑知识图谱存储、实体关系验证、多跳路径验证 |
+| **缓存+短期记忆数据库** | Redis-Stack | 内存数据库，低延迟读写适合短期记忆存取，通过内置的布隆过滤器支撑高频查询缓存过滤，限流熔断器 |
 | **消息队列** | Redis Stream | 基于现有 Redis 基础设施，轻量级解耦知识库与知识图谱的异步入库，避免引入外部中间件Kafka增加系统复杂度 |
 | **模型量化** | ONNXRUNTIME | 相比Optimum方法更底层、可定制化量化范围更广 |
-| **日志监控** | LangSmith + 本地logger | 自动生成所有由LangGraph开发的结构化日志 + 本地logger日志兜底 |
+| **日志监控** | LangFuse + RAGAS | 自动收集所有由LangGraph开发的内置监控 + 自定义Langfuse监控 + RAGAS在线/离线指标 + 本地logger日志 |
 
 
 ## 📸 演示截图
