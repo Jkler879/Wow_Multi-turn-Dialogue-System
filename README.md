@@ -30,9 +30,9 @@
 - **查询改写**：本地模型 `Qwen3-4B` 结合短期记忆 + `few-shot prompt` 进行**指代消解**，并将中文问题改写为独立英文检索问题，同时输出中文翻译。
 
 ### 2、ReAct Agent 自主规划与工具调用
-- **Agent 核心**：`Qwen-plus` 模型（API）作为 ReAct Agent中驱，自主决定是思考、观察、行动(调用工具或生成答案)。
+- **Agent 核心**：`Qwen3-30b-A3b` API）作为 ReAct Agent中驱，自主决定是思考、观察、行动(调用工具或生成答案)。
     
-    - 选型原因：当前用 `Qwen-plus API` 替代。后期通过云服务器升级计算资源，本地部署 `Qwen3-30b-a3b` ，MOE架构3b激活参数模型专用于ReAct Agent开发，具备自主规划循环调用各工具集能力。
+    - 选型原因：当前用 `Qwen3-30b-A3b API` 替代。后期通过云服务器升级计算资源，本地部署 `Qwen3-30b-a3b` ，MOE架构3b激活参数模型专用于ReAct Agent开发，具备自主规划循环调用各工具集能力。
 
 - **Agent 框架：LanGraph**
   - 基于有向图将 `ReAct` 循环显式拆解为 `思考-行动-观察` 节点，通过条件边动态控制分支。集成 `CoT` 思维链，强制 LLM 在每步决策前输出推理步骤Thought，通过输出思考过程提升每轮答案准确率，LanGraph每轮传递皆通过functional call避免格式错误等。
