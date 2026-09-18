@@ -100,7 +100,7 @@
 
 | 组件 | 选型 | 理由 |
 |------|------|------|
-| **Agent 框架** | LangGraph | 原生状态图编排可精细控制思考-行动-观察循环，结合Cot使LLM展示思考过程，大幅提高生成准确率 |
+| **Agent 框架** | LangGraph | 原生状态图编排可精细控制思考-行动-观察循环，支持工具集扩展，ReAct Agent标配|
 | **ReAct Agent 模型** | Qwen3-30b-a3b (API) | 大参数模型确保支撑ReAct Agent能精准解析输出、稳定执行工具调用。百炼平台提供百万token Free额度，零成本支撑当前阶段开发与测试，后期用Qwen3-30b-a3b本地部署替换 |
 | **重排模型** | BGE Reranker-v2-m3 (本地ONNX) | Hugging Face 最强开源重排模型之一，26年被 Qwen3-rerank-0.6B性能超越，因项目早期于2026年年初设计选型沿用。|
 | **翻译模型** | Helsinki-NLP (本地ONNX) | Hugging Face 专业开源英转中翻译模型（模型精度、速度在过往项目中实际部署验证过） |
