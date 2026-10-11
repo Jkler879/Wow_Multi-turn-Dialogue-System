@@ -142,9 +142,9 @@
 
 ## 🚀 后续优化方向
   - **推理引擎升级**：
-      - 2、Qlora微调 Qwen3-4b 模型，增加查询改写、长期记忆新旧记忆对比任务的准确率。
-      - 3、基于当前服务器配置，将 Qwen3-30b-a3b api 替换为本地部署 Qwen3-14B int4量化版，移除 API 费用。(rag精度几乎无损，但复杂推理明显降级)
-      - 4、添加多 Agent 协作，改造原有LangGraph单Agent模式。
+      - 2、Qlora 微调 Qwen3-4b 模型，增加查询改写、长期记忆新旧记忆对比任务的准确率。
+      - 3、基于当前服务器配置，将 Qwen3-30b-a3b api 替换为本地部署 Qwen3-14B int4 量化版，移除 API 费用。
+      - 4、多 Agent 协作，改造原有LangGraph单Agent模式。
       - 5、添加K3S部署，替代原有Docker Compose。
  
   - **实体关系验证增强**：
