@@ -8,9 +8,9 @@
   
   - GPU vLLM + TEI 双框架模型部署 / Langfuse在线监控 + RAGAS离线指标评估 / 前端页面展示
 
-  - 独立数据飞轮 Agent：https://github.com/Jkler879/WOW-Round3
+  - 独立数据飞轮 Agent： https://github.com/Jkler879/WOW-Round3
   
-  - 生产级并发压测模块: https://github.com/Jkler879/Wow-Production-Grade-Stress-Testing-Module
+  - 生产级并发压测模块： https://github.com/Jkler879/Wow-Production-Grade-Stress-Testing-Module
 
  
   **在线演示**：项目完整代码均已同步 Github，如需在线体验前端界面请提前告知（服务器非 7 * 24 小时运行）
