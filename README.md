@@ -39,9 +39,9 @@
 - **查询改写**：本地模型 `Qwen3-4B` 结合短期记忆 + `few-shot prompt` 进行**指代消解**，并将中文问题改写为独立英文检索问题，同时输出中文翻译。
 
 ### 2、ReAct Agent 自主规划与工具调用
-- **ReAct Agent 中枢**：`Qwen3-30b-A3b` （API）
+- **ReAct Agent 中枢**：`Qwen3.5-35b-A3b` （API）
     
-    - 选型原因：MOE架构 3b 激活参数模型专用于 ReAct Agent 开发，具备自主规划循环调用各工具集能力。
+    - 选型原因：MOE 架构 3b 激活参数; ReAct每题要多轮调用模型，思考模式额外生成大量推理 token，激活参数少明显降低单次请求的延迟和成本。
 
 - **Agent 框架：LanGraph**
   - 基于有向图将 `ReAct` 循环显式拆解为 `思考-行动-观察` 节点，通过条件边动态控制分支。集成 `CoT` 思维链，强制 LLM 在每步决策前输出推理步骤Thought，通过输出思考过程提升每轮答案准确率，LanGraph每轮传递皆通过functional call避免格式错误等。
