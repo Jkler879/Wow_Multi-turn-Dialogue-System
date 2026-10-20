@@ -129,17 +129,6 @@
 | **日志监控** | LangFuse + RAGAS | 自动收集所有由LangGraph开发的内置监控 + 自定义Langfuse监控 + RAGAS在线/离线指标 + 本地logger日志 |
 
 
-## 📸 演示截图
-
-| FastAPI 单轮对话请求与响应示例 | FastAPI 多轮对话成功指代消解示例 |  |
-|-------------|---------|-------------|
-| ![API Docs_First_Dialouge](screen/Round1_dialogue.jpg) | ![API Docs_Seconde_Dialouge](screen/Round2_dialogue.jpg) |
-  
-| 完整请求日志1 | 完整请求日志2  | 完整请求日志3  | 完整请求日志4  | 
-|---------------|---------------|---------------|---------------|
-| ![API_logger_01](screen/fastapi_total_logger01.jpg) | ![API_logger_02](screen/fastapi_total_logger02.jpg) | ![API_logger_03](screen/fastapi_total_logger03.jpg) | ![API_logger_04](screen/fastapi_total_logger04.jpg) |
-
-
 ## 🚀 后续优化方向
   - **推理引擎升级**：
       - 2、Qlora 微调 Qwen3-4b 模型，增加查询改写、长期记忆新旧记忆对比任务的准确率。
