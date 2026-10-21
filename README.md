@@ -12,7 +12,8 @@
   
   - 生产级并发压测： https://github.com/Jkler879/Wow-Production-Grade-Stress-Testing-Module
 
-  **演示录频（无需登录，可直接播放）**：https://my.feishu.cn/wiki/UmIKweOogilGNikRkV9ceK22nof?from=from_copylink
+
+  **演示录频（无需登录）**：https://my.feishu.cn/wiki/UmIKweOogilGNikRkV9ceK22nof?from=from_copylink
   
   **在线演示**：项目完整代码均已同步 Github，如需在线体验前端界面请提前告知（服务器非 7 * 24 小时运行）
   
